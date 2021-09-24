@@ -23,11 +23,15 @@ function ListPage() {
     ])
 
     const handleWrite = () => {
+        setPost({...Post, Num})
         setPosts([...Posts, Post])
         setNum(Num + 1)
     }
     const changeInput = (e) => {
         setPost({ ...Post, [e.target.name]: e.target.value })
+    }
+    const handleDelete = (e) => {
+        setPosts(Posts.filter((post) => { return post.id !== e.target.id }))
     }
 
     return (
@@ -53,8 +57,8 @@ function ListPage() {
             </form>
             {Posts.map((post) => (
                 <StyledItemBox>
-                    <div>번호 : {post.id}, 제목 : {post.title}, 내용: {post.content}</div>
-                    <button>삭제</button>
+                    <div>제목 : {post.title}, 내용: {post.content}</div>
+                    <button id={post.id} onClick={handleDelete}>삭제</button>
                 </StyledItemBox>
             ))}
         </div>
